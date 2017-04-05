@@ -2,6 +2,7 @@ package com.application.mycalc;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -10,7 +11,7 @@ import java.math.RoundingMode;
 
 public class MainActivity extends Activity  {
 
-    String result = "0";                                        // Результат в строковой форме
+    String result = "0";                     // Результат в строковой форме
     char sign;                                                  // Выбраный знак (+,-,*,/)
     String a = "", b = "";                                      //Числа а и b в строковом виде
     boolean plus = false, minus = false, multiple = false, divide = false;        //Флаги выбора знака
@@ -30,13 +31,14 @@ public class MainActivity extends Activity  {
         tvResult = (TextView) findViewById(R.id.tvResult);           //Находим текст вью
         tvResult.setText(result);                                   //Вставляем исходный текст
         tvResult.setTextSize(textSize);                             //Задаём размер
+
     }
 
 
     public void onClick(View v) {
 
         double aDbl, bDbl;      //числа а и b в double виде
-        double resultD=0;    // Результат в дабл форме
+        double resultD=0;       // Результат в дабл форме
 
 
         char[] numbers = {'1', '2','3', '4','5','6','7','8','9'};
@@ -96,8 +98,7 @@ public class MainActivity extends Activity  {
             //Обработка нажатия на кнопку взятия процента от числа (я не особо разобрался что она должна делать, поэтому она просто делит число на 100)
             case R.id.btnPercent:
                 if (!a.equals("")){
-                    result = (Double.parseDouble(a) / 100) + "";                     //основной функционал
-
+                    result = (Double.parseDouble(a) / 100) + "";               //основной функционал
                     a = result;                                                //Сохраняем результат в a для того, чтобы дальше с ним работать
                 }
                 else result = "0";
@@ -244,6 +245,8 @@ public class MainActivity extends Activity  {
         result = "";
     }
 
+
+
     protected void onSaveInstanceState(Bundle outState) {      //Сохраняем нужные значения для того, чтобы они сохранились после поворота экрана
         super.onSaveInstanceState(outState);
         outState.putString("a",a);
@@ -257,6 +260,8 @@ public class MainActivity extends Activity  {
         outState.putInt("textSize", textSize);
         outState.putInt("maxTextSize", maxsize);
     }
+
+
 
     protected void onRestoreInstanceState(Bundle savedInstanceState) {     //Загружаем значения после поворота экрана
         super.onRestoreInstanceState(savedInstanceState);
